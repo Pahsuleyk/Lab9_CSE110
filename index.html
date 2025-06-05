@@ -94,7 +94,7 @@
     token: "83b85315c5fb43ce99c5997bce6f4f92"
     // for more configuration options, see https://docs.trackjs.com
     });
-    
+
     class CalculationError extends Error {
     constructor(message) {
       super(message);
@@ -191,13 +191,8 @@
       });
     });
 
-    window.onerror = function (message, source, lineno, colno, error) {
+    window.onerror = function (error) {
       console.error("Global Error Caught:");
-      console.error(`Message: ${message}`);
-      console.error(`Source: ${source}`);
-      console.error(`Line: ${lineno}, Column: ${colno}`);
-      console.error(`Error Object:`, error);
-      return true;
     };
 
   </script>
