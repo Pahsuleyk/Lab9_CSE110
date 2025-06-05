@@ -87,7 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+
   <script>
+    window.TrackJS && TrackJS.install({ 
+    token: "83b85315c5fb43ce99c5997bce6f4f92"
+    // for more configuration options, see https://docs.trackjs.com
+    });
+    
     class CalculationError extends Error {
     constructor(message) {
       super(message);
@@ -183,6 +190,15 @@
         }
       });
     });
+
+    window.onerror = function (message, source, lineno, colno, error) {
+      console.error("Global Error Caught:");
+      console.error(`Message: ${message}`);
+      console.error(`Source: ${source}`);
+      console.error(`Line: ${lineno}, Column: ${colno}`);
+      console.error(`Error Object:`, error);
+      return true;
+    };
 
   </script>
 </body>
