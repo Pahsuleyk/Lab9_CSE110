@@ -88,6 +88,13 @@
   </main>
 
   <script>
+    class CalculationError extends Error {
+    constructor(message) {
+      super(message);
+      this.name = "CalculationError";
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -98,17 +105,21 @@
 
       try {
         if (isNaN(firstNum) || isNaN(secondNum)) {
-          throw new Error("Invalid input: Please enter numeric values.");
+          throw new CalculationError("Invalid input: Please enter numeric values.");
         }
 
         if (operator === "/" && secondNum == 0) {
-          throw new Error("Math error: Division by zero is not allowed.");
+          throw new CalculationError("Math error: Division by zero is not allowed.");
         }
 
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
       } catch (error) {
-        console.error("An error occurred:", error.message);
-        output.innerHTML = `Error: ${error.message}`;
+        if (error instanceof CalculationError) {
+          console.error(`${error.name}: ${error.message}`);
+          output.innerHTML = `Error: ${error.message}`;
+        } else {
+          console.error("Unexpected Error:", error);
+        }
       } finally {
         console.log("Calculation attempt completed.");
       }
