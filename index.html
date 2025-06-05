@@ -157,15 +157,6 @@
       });
     });
 
-    let form = document.querySelector('form');
-
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      let output = document.querySelector('output');
-      let firstNum = document.querySelector('#first-num').value;
-      let secondNum = document.querySelector('#second-num').value;
-      let operator = document.querySelector('#operator').value;
-
       try {
         if (isNaN(firstNum) || isNaN(secondNum)) {
           throw new Error("Invalid input: Please enter numeric values.");
@@ -182,7 +173,6 @@
       } finally {
         console.log("Calculation attempt completed.");
       }
-    });
 
   </script>
 </body>
