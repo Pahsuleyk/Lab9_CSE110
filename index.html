@@ -157,6 +157,33 @@
       });
     });
 
+    let form = document.querySelector('form');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let output = document.querySelector('output');
+      let firstNum = document.querySelector('#first-num').value;
+      let secondNum = document.querySelector('#second-num').value;
+      let operator = document.querySelector('#operator').value;
+
+      try {
+        if (isNaN(firstNum) || isNaN(secondNum)) {
+          throw new Error("Invalid input: Please enter numeric values.");
+        }
+
+        if (operator === "/" && secondNum == 0) {
+          throw new Error("Math error: Division by zero is not allowed.");
+        }
+
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error("An error occurred:", error.message);
+        output.innerHTML = `Error: ${error.message}`;
+      } finally {
+        console.log("Calculation attempt completed.");
+      }
+    });
+
   </script>
 </body>
 
