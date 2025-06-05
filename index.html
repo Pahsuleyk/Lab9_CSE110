@@ -95,7 +95,23 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+      try {
+        if (isNaN(firstNum) || isNaN(secondNum)) {
+          throw new Error("Invalid input: Please enter numeric values.");
+        }
+
+        if (operator === "/" && secondNum == 0) {
+          throw new Error("Math error: Division by zero is not allowed.");
+        }
+
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error("An error occurred:", error.message);
+        output.innerHTML = `Error: ${error.message}`;
+      } finally {
+        console.log("Calculation attempt completed.");
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -156,23 +172,6 @@
         }
       });
     });
-
-      try {
-        if (isNaN(firstNum) || isNaN(secondNum)) {
-          throw new Error("Invalid input: Please enter numeric values.");
-        }
-
-        if (operator === "/" && secondNum == 0) {
-          throw new Error("Math error: Division by zero is not allowed.");
-        }
-
-        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
-      } catch (error) {
-        console.error("An error occurred:", error.message);
-        output.innerHTML = `Error: ${error.message}`;
-      } finally {
-        console.log("Calculation attempt completed.");
-      }
 
   </script>
 </body>
